@@ -1,11 +1,13 @@
+import type { Cordinates } from "@/types/weather";
 import { API_CONFIG } from "./config";
-import type { WeatherResponse, Cordinates } from "./types";
+import type { WeatherResponse } from "./types";
 
 class WeatherAPI {
     private createURL(url: string, params: Record<string, string | number>) {
         const searchParams = new URLSearchParams({
-            key: API_CONFIG.API_KEY,
-            ...params
+            ...params,
+            key: API_CONFIG.API_KEY
+            
         });
         return `${url}?${searchParams.toString()}`;
     }
@@ -21,7 +23,7 @@ class WeatherAPI {
 
     async getCurrentWeather({ latitude, longitude }: Cordinates) {
         const url = this.createURL(`${API_CONFIG.BASE_URL}/current.json`, {
-            p: `${latitude},${longitude}`
+            q: `${latitude},${longitude}`
         });
         return await this.fetchData<WeatherResponse>(url);
     }
@@ -31,6 +33,8 @@ class WeatherAPI {
         const url = this.createURL(`${API_CONFIG.BASE_URL}/search.json`, {
             p: searchText
         });
-        return await this.fetchData<WeatherResponse>(url);
+        return await this.fetchData<Location[]>(url);
     }
 }
+
+export const weatherAPI = new WeatherAPI();

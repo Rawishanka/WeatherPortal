@@ -8,11 +8,6 @@ export interface Location {
   url: string,
 };
 
-export interface Cordinates {
-    latitude : number,
-    longitude : number
-}
-
 
 export interface WeatherResponse {
   location: WeatherLocation;
