@@ -1,3 +1,5 @@
+import type { HourlyWeatherData } from "@/types/weather";
+
 export interface Location {
   id: number,
   name: string,
@@ -21,6 +23,7 @@ export interface WeatherLocation extends Omit<Location, 'id' | 'url'> {
 }
 
 export interface Current {
+  last_updated: string;
   temp_c: number;
   temp_f: number;
   is_day: number;
@@ -53,4 +56,22 @@ export interface Current {
 export interface Condition {
   icon: string;
   code: number;
+  text:string;
+}
+
+
+export interface ForecastDay {
+  day: Record<string, any>; 
+  hour: HourlyWeatherData[];
+}
+
+
+export interface Forecast {
+  forecastday: ForecastDay[];
+}
+
+
+export interface WeatherForecastResponse {
+  location: WeatherLocation;
+  forecast: Forecast;
 }

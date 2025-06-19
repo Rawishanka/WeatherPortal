@@ -6,7 +6,9 @@ const Header = () => {
         <header className="h-16 px-5 sm:px-10 flex items-center shadow-md">
             <div className="flex items-center">
                 <Link to="/">
-                    <img src="/logo.png" alt="Weather logo" className="h-10 w-auto" />
+                    <div className='flex items-center text-teal-700 font-bold'>
+                        <img src="/logo.png" alt="Weather logo" className="h-10 w-auto mr-2" /> WeatherPotral
+                    </div>
                 </Link>
             </div>
             {/* Search bar */}
@@ -15,7 +17,7 @@ const Header = () => {
             </div>
 
             {/* Theme toggle button */}
-            <ThemeToggleButton/>
+            <ThemeToggleButton />
         </header>
     )
 }

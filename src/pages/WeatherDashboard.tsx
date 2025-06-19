@@ -1,19 +1,23 @@
 import type { Location } from "@/api/types"
-import CurrentCityWeather from "@/components/CurrentCityWeather"
+import CurrentCityWeather from "@/components/CurrentWeather"
 import LoadingWeather from "@/components/LoadingWeather"
+import TodayWeather from "@/components/TodayWeather"
 import { Button } from "@/components/ui/button"
-import { useWeatherQuery } from "@/hooks/useWeather"
+import { useHourlyDataQuery, useLocationQuery, useWeatherQuery } from "@/hooks/useWeather"
 import { icons, RefreshCw } from "lucide-react"
 
 
 const WeatherDashboard = () => {
-  
+
+  const cityDetails = useLocationQuery();
   const weather = useWeatherQuery();
-  const handleRefresh = ()=>{
-    weather.refetch();
+  const hourlyData = useHourlyDataQuery();
+  
+  const handleRefresh = () => {
+    weather.refetch()
   }
 
-  const location : Location =  {
+  const location: Location = {
     "id": 2842281,
     "name": "Colombo",
     "region": "Western",
@@ -22,26 +26,28 @@ const WeatherDashboard = () => {
     "lon": 79.85,
     "url": "colombo-western-sri-lanka"
   };
+  console.log(cityDetails.data)
 
-  
-  if(weather.isLoading){
-    return <LoadingWeather/>
+  if (weather.isLoading) {
+    return <LoadingWeather />
   }
   return (
     <div>
       {/* reload current whether */}
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold tracking-tight">Location</h1>
+        <h1 className="text-xl font-bold tracking-tight">Weather</h1>
+        <div>search bar</div>
         <div>
           <Button size={"icon"} variant={"outline"} onClick={handleRefresh}>
-            <RefreshCw className={`${weather.isFetching ? " animate-spin h-4 w-4" : "h-4 w-4"}`} />
+            <RefreshCw className={`transition-transform duration-500${weather.isFetching ? "transition-transform duration-500 animate-spin h-4 w-4" : "h-4 w-4 "}`} />
           </Button>
         </div>
       </div>
 
       <div className="gird gap-6">
-        <div>
+        <div className="flex md:flex-row flex-col gap-4">
           <CurrentCityWeather data={weather.data!} location={location} />
+          <TodayWeather hourlyData={hourlyData.data!.forecast.forecastday[0].hour} />
         </div>
         <div>dd</div>
       </div>
