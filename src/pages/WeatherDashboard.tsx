@@ -18,38 +18,29 @@ import DayForcastMobile from "@/components/daily_weather/DayForcastMobile"
 import Header from "@/components/Header"
 import CurrentCityWeatherMobile from "@/components/current_weather/CurrentWeatherMobile"
 import useMediaQuery from "@/hooks/useMediaQuery"
+import CurrentWeatherMobileSkeleton from "@/components/current_weather/CurrentWeatherMobileSkeleton"
+import DailyForecastSkeleton from "@/components/daily_weather/DailyForcastSkeleton"
+import DailyForcastSkeletonMobile from "@/components/daily_weather/DailyForcastSkeletonMobile"
+import WeatherSearch from "@/components/weather_search/WeatherSearch"
+import { useEffect, useState } from "react"
+import type { Cordinates } from "@/types/weather"
 
 const WeatherDashboard = () => {
-  const cityDetails = useLocationQuery()
-  const weather = useWeatherQuery()
-  const hourlyData = useHourlyDataQuery();
+  const [selectedCity, setSelectedCity] = useState<Cordinates>();
+  const weather = useWeatherQuery(selectedCity);
+  const hourlyData = useHourlyDataQuery("5",selectedCity);
   const isMobile = useMediaQuery(490);
 
-  const showSkeleton = weather.isLoading || hourlyData.isLoading
+  const showSkeleton = weather.isLoading || hourlyData.isLoading;
+  const isForecastReady = !hourlyData.isLoading && !!hourlyData.data?.forecast;
 
   const handleRefresh = () => {
-    weather.refetch()
+    weather.refetch();
+    hourlyData.refetch();
   }
 
-  const location: Location = {
-    id: 2842281,
-    name: "Colombo",
-    region: "Western",
-    country: "Sri Lanka",
-    lat: 6.93,
-    lon: 79.85,
-    url: "colombo-western-sri-lanka"
-  }
 
-  if (weather.isError) {
-    return (
-      <ErrorAlert
-        title="Weather Not Found"
-        description="Weather details fetching error"
-      />
-    )
-  }
-  if (hourlyData.isError) {
+  if (weather.isError || hourlyData.isError) {
     return (
       <ErrorAlert
         title="Weather Not Found"
@@ -65,16 +56,17 @@ const WeatherDashboard = () => {
         {/* reload current weather */}
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold tracking-tight">Weather</h1>
-          <div>search bar</div>
+          <div><WeatherSearch selectCordinate={setSelectedCity} /></div>
           <div>
             <Button
               size={"icon"}
               variant={"outline"}
               onClick={handleRefresh}
               disabled={weather.isFetching}
+              className="cursor-pointer"
             >
               <RefreshCw
-                className={`h-4 w-4 transition-transform duration-500 ${weather.isFetching ? "animate-spin" : ""
+                className={`h-4 w-4 cursor-pointer transition-transform duration-500 ${weather.isFetching ? "animate-spin" : ""
                   }`}
               />
             </Button>
@@ -84,25 +76,9 @@ const WeatherDashboard = () => {
         <div className=" mt-2">
           <div className="flex lg:flex-row flex-col gap-4">
             {weather.isLoading ? (
-              <>
-                <div className="sm:block hidden">
-                  <CurrentWeatherSkeleton />
-                </div>
-                <div className="block sm:hidden">
-                  mobile
-                </div>
-              </>
+              isMobile ? <CurrentWeatherMobileSkeleton /> : <CurrentWeatherSkeleton />
             ) : (
-              // <div>
-              //   <div className="sm:block hidden">
-              //     <CurrentCityWeather data={weather.data!} location={location} />
-              //   </div>
-              //   <div className="sm:hidden block">
-              //     <CurrentCityWeatherMobile  data={weather.data!} location={location} />
-              //   </div>
-              // </div>
-                isMobile ? <CurrentCityWeatherMobile data={weather.data!} location={location} /> : <CurrentCityWeather data={weather.data!} location={location} />
-              
+              isMobile ? <CurrentCityWeatherMobile data={weather.data!} /> : <CurrentCityWeather data={weather.data!} />
             )}
 
             {hourlyData.isLoading ? (
@@ -116,16 +92,21 @@ const WeatherDashboard = () => {
         </div>
 
         <div className="flex flex-wrap lg:flex-nowrap gap-6 mt-4 items-start w-full overflow-x-auto sm:overflow-x-visible">
-          <div className="flex-1 min-w-[600px] hidden sm:block">
-            {!hourlyData.isLoading && hourlyData.data?.forecast && (
-              <DailyForcast data={hourlyData.data.forecast} />
-            )}
-          </div>
-          <div className="flex-1 min-w-[200px] sm:hidden block">
-            {!hourlyData.isLoading && hourlyData.data?.forecast && (
-              <DayForcastMobile data={hourlyData.data.forecast} />
-            )}
-          </div>
+          {isForecastReady ? <>
+            <div className="flex-1 min-w-[600px] hidden sm:block">
+              <DailyForcast data={hourlyData.data!.forecast} />
+            </div>
+            <div className="flex-1 min-w-[200px] sm:hidden block">
+              <DayForcastMobile data={hourlyData.data!.forecast} />
+            </div>
+          </> : <>
+            <div className="flex-1 min-w-[600px] hidden sm:block">
+              <DailyForecastSkeleton />
+            </div>
+            <div className="flex-1 min-w-[200px] sm:hidden block">
+              <DailyForcastSkeletonMobile />
+            </div>
+          </>}
           <div className="flex-1 w-full min-w-[200px]">
             {showSkeleton ? (
               <WeatherDetailsSkeleton />
@@ -142,7 +123,6 @@ const WeatherDashboard = () => {
       </div>
       <footer className="border-t backdrop-blur supports-[backdrop-filter]:bg-background/60">footer</footer>
     </>
-
   )
 }
 

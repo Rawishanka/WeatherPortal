@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 const KEYS = {
     weather: (cordinates: Cordinates) => ["weather", cordinates] as const,
     location: (search: string) => ["location", search] as const,
-    hourlyData:(hourlyData: string) => ["hourly-data", hourlyData] as const
+    hourlyData:(hourlyData: Cordinates) => ["hourly-data", hourlyData] as const
 }
 
 
@@ -28,10 +28,11 @@ export function useLocationQuery(keyWord?: string) {
 }
 
 
-export function useHourlyDataQuery(days?: string) {
+export function useHourlyDataQuery(days?: string , location?:Cordinates) {
     days = days ?? "5";
+    location = location ?? DEFAULT_LOCATION
     return useQuery({
-        queryKey: KEYS.hourlyData(days),
-        queryFn: ()=> weatherAPI.getHourlyData(days, DEFAULT_LOCATION)
+        queryKey: KEYS.hourlyData(location),
+        queryFn: ()=> weatherAPI.getHourlyData(days, location)
     });
 }

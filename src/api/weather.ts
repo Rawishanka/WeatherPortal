@@ -1,6 +1,6 @@
 import type { Cordinates } from "@/types/weather";
 import { API_CONFIG } from "./config";
-import type { WeatherForecastResponse, WeatherResponse } from "./types";
+import type { Location, WeatherForecastResponse, WeatherResponse } from "./types";
 
 class WeatherAPI {
     private createURL(url: string, params: Record<string, string | number>) {

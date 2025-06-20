@@ -5,11 +5,10 @@ import { formatWeatherDate } from '@/utils/date';
 
 
 interface CityWeatherProps {
-    data: WeatherResponse,
-    location: Location
+    data: WeatherResponse
 }
 
-const CurrentCityWeather = ({ data, location }: CityWeatherProps) => {
+const CurrentCityWeather = ({ data }: CityWeatherProps) => {
     const {
         last_updated,
         temp_c,
@@ -19,7 +18,7 @@ const CurrentCityWeather = ({ data, location }: CityWeatherProps) => {
         feelslike_c,
         condition: { icon, text },
     } = data.current;
-
+    const location = data.location;
 
     return (
         <Card className="overflow-hidden shadow-lg">
