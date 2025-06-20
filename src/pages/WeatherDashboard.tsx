@@ -24,6 +24,7 @@ import DailyForcastSkeletonMobile from "@/components/daily_weather/DailyForcastS
 import WeatherSearch from "@/components/weather_search/WeatherSearch"
 import { useEffect, useState } from "react"
 import type { Cordinates } from "@/types/weather"
+import Footer from "@/components/Footer"
 
 const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState<Cordinates>();
@@ -53,9 +54,10 @@ const WeatherDashboard = () => {
       <Header />
       <div className="px-6 py-8 flex-grow container mx-auto ">
         {/* reload current weather */}
+        {isMobile && <div className="w-full flex justify-center"><WeatherSearch selectCordinate={setSelectedCity} /></div>}
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold tracking-tight">Weather</h1>
-          <div><WeatherSearch selectCordinate={setSelectedCity} /></div>
+          {!isMobile && <div><WeatherSearch selectCordinate={setSelectedCity} /></div>}
           <div>
             <Button
               size={"icon"}
@@ -120,7 +122,7 @@ const WeatherDashboard = () => {
           </div>
         </div>
       </div>
-      <footer className="border-t backdrop-blur supports-[backdrop-filter]:bg-background/60">footer</footer>
+      <Footer/>
     </>
   )
 }

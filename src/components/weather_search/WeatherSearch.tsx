@@ -17,13 +17,6 @@ const WeatherSearch = ({ selectCordinate }: Props) => {
     const debouncedKeyword = useDebounce(keyword, 300);
     const geoQuery = useLocationQuery(debouncedKeyword);
 
-    const handleChange = (text: string) => {
-        if (text.length > 3) {
-            setKeyword(text);
-        }
-    }
-
-
     const handleSelect = (location: Location) => {
         console.log(location);
         const cord: Cordinates = {
@@ -40,10 +33,10 @@ const WeatherSearch = ({ selectCordinate }: Props) => {
             <Button
                 onClick={() => setOpen(true)}
                 variant="outline"
-                className="flex text-muted-foreground cursor-text justify-center items-center w-auto md:w-40"
+                className="flex text-muted-foreground cursor-text justify-center items-center w-auto md:w-60"
             >
-                <Search className="mr-2 h-4 w-4" />
-                <p>Search by City</p>
+                <Search className=" h-4 w-4" />
+                <p className=''>Search by City</p>
             </Button>
 
             <CommandDialog open={open} onOpenChange={setOpen}>
