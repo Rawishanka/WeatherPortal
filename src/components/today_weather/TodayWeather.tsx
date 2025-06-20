@@ -19,7 +19,7 @@ interface ChartData {
 type Props = {
   hourlyData: HourlyWeatherData[];
 };
-const TodayWeather = ({ hourlyData }: Props) => {
+const TodayWeather = React.memo(({ hourlyData }: Props) => {
 
   function convertToChartData(data: HourlyWeatherData[]): ChartData[] {
     return data
@@ -116,6 +116,6 @@ const TodayWeather = ({ hourlyData }: Props) => {
       </CardContent>
     </Card>
   )
-}
+});
 
 export default TodayWeather

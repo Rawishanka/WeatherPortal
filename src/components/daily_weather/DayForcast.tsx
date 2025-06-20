@@ -12,7 +12,7 @@ interface UpcomingDaysProps {
 }
 
 
-const DailyForecast = ({ data }: UpcomingDaysProps) => {
+const DailyForecast = React.memo(({ data }: UpcomingDaysProps) => {
 
   const upcomingDays: TableData[] = data.forecastday.map(item => {
     const tableData: TableData = {
@@ -78,6 +78,6 @@ const DailyForecast = ({ data }: UpcomingDaysProps) => {
       </CardContent>
     </Card>
   )
-}
+})
 
 export default DailyForecast

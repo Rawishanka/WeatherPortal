@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command'
 import { Button } from '../ui/button';
-import { Search } from 'lucide-react';
+import { Loader2, Search } from 'lucide-react';
 import { useLocationQuery } from '@/hooks/useWeather';
 import type { Cordinates } from '@/types/weather';
 import type { Location } from '@/api/types';
+import { useDebounce } from '@/hooks/useDebounce';
 
 
 interface Props {
-    selectCordinate:  (cord: Cordinates | undefined) => void;
+    selectCordinate: (cord: Cordinates | undefined) => void;
 }
 const WeatherSearch = ({ selectCordinate }: Props) => {
     const [open, setOpen] = useState(false);
-    const [keyword, setKeyword] = useState(" ");
-    const geoQuery = useLocationQuery(keyword);
+    const [keyword, setKeyword] = useState("");
+    const debouncedKeyword = useDebounce(keyword, 300);
+    const geoQuery = useLocationQuery(debouncedKeyword);
 
     const handleChange = (text: string) => {
         if (text.length > 3) {
@@ -45,14 +47,23 @@ const WeatherSearch = ({ selectCordinate }: Props) => {
             </Button>
 
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <CommandInput onValueChange={handleChange} placeholder="Search city..." />
+                <CommandInput value={keyword} onValueChange={setKeyword} placeholder="Search city..." />
                 <CommandList>
-                    <CommandEmpty>No results found.</CommandEmpty>
+                    {keyword.length > 2 && !geoQuery.isLoading && (
+                        <CommandEmpty>No cities found.</CommandEmpty>
+                    )}
                     <CommandGroup heading="Suggestions">
-                        {geoQuery.isLoading && <CommandItem disabled>Loading...</CommandItem>}
-
-                        {geoQuery.data?.map((item:Location) => (
-                            <CommandItem value={`${item.lat}|${item.lon}`} key={`${item.lat}${item.lon}`} onSelect={() => handleSelect(item)}>
+                        {geoQuery.isLoading && (
+                            <div className="flex items-center justify-center p-4">
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                            </div>
+                        )}
+                        {geoQuery.data && geoQuery.data!.map((item: Location) => (
+                            <CommandItem
+                                value={`${item.name}, ${item.country}`}
+                                key={`${item.lat}${item.lon}`}
+                                onSelect={() => handleSelect(item)}
+                            >
                                 {item.name}, {item.country}
                             </CommandItem>
                         ))}

@@ -36,7 +36,6 @@ const WeatherDashboard = () => {
 
   const handleRefresh = () => {
     weather.refetch();
-    hourlyData.refetch();
   }
 
 

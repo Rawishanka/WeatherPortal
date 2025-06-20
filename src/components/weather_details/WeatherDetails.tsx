@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
 
@@ -10,7 +11,7 @@ interface WeatherDetailsProps {
   pressure:string;
 }
 
-const WeatherDetails = ({sunrise,sunset, wind_direction, pressure}:WeatherDetailsProps) => {
+const WeatherDetails = React.memo(({sunrise,sunset, wind_direction, pressure}:WeatherDetailsProps) => {
    const details = [
     {
       title: "Sunrise",
@@ -62,6 +63,6 @@ const WeatherDetails = ({sunrise,sunset, wind_direction, pressure}:WeatherDetail
       </CardContent>
     </Card>
   )
-}
+})
 
 export default WeatherDetails
