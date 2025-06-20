@@ -22,7 +22,7 @@ const CurrentCityWeather = ({ data, location }: CityWeatherProps) => {
 
 
     return (
-        <Card className="overflow-hidden mt-3">
+        <Card className="overflow-hidden shadow-lg">
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <CloudSun className="h-6 w-6 text-yellow-500" />
@@ -38,7 +38,7 @@ const CurrentCityWeather = ({ data, location }: CityWeatherProps) => {
             </CardHeader>
             <CardContent>
                 <div className="">
-                    <div className="space-y-4 col-span-2 grid grid-cols-3">
+                    <div className="space-y-4 col-span-2 grid grid-cols-3 min-w-[400px]">
                         {/* temperature area */}
                         <div className='col-span-2'>
                             <div className="flex items-center gap-2">

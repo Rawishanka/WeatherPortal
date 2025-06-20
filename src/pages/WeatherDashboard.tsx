@@ -1,5 +1,7 @@
 import type { Location } from "@/api/types"
 import CurrentCityWeather from "@/components/CurrentWeather"
+import DayWeatherTable from "@/components/DayWeatherTable"
+import ExtraWeatherDetails from "@/components/ExtraWeatherDetails"
 import LoadingWeather from "@/components/LoadingWeather"
 import TodayWeather from "@/components/TodayWeather"
 import { Button } from "@/components/ui/button"
@@ -12,7 +14,7 @@ const WeatherDashboard = () => {
   const cityDetails = useLocationQuery();
   const weather = useWeatherQuery();
   const hourlyData = useHourlyDataQuery();
-  
+
   const handleRefresh = () => {
     weather.refetch()
   }
@@ -44,12 +46,15 @@ const WeatherDashboard = () => {
         </div>
       </div>
 
-      <div className="gird gap-6">
-        <div className="flex md:flex-row flex-col gap-4">
+      <div className="gird gap-6 mt-2">
+        <div className="flex lg:flex-row flex-col gap-4">
           <CurrentCityWeather data={weather.data!} location={location} />
           <TodayWeather hourlyData={hourlyData.data!.forecast.forecastday[0].hour} />
         </div>
-        <div>dd</div>
+        <div className="flex lg:flex-row flex-col gap-4 mt-4">
+          <ExtraWeatherDetails sunset={hourlyData.data!.forecast.forecastday[0].astro.sunset} sunrise={hourlyData.data!.forecast.forecastday[0].astro.sunrise} wind_direction={weather.data!.current.wind_dir.toString()} pressure={weather.data!.current.pressure_in.toString()} />
+          <DayWeatherTable />
+        </div>
       </div>
     </div>
   )

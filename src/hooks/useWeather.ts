@@ -28,10 +28,10 @@ export function useLocationQuery(keyWord?: string) {
 }
 
 
-export function useHourlyDataQuery(date?: string) {
-    date = date ?? "2025-07-20";
+export function useHourlyDataQuery(days?: string) {
+    days = days ?? "5";
     return useQuery({
-        queryKey: KEYS.location(date),
-        queryFn: ()=> weatherAPI.getHourlyData(date, DEFAULT_LOCATION)
+        queryKey: KEYS.location(days),
+        queryFn: ()=> weatherAPI.getHourlyData(days, DEFAULT_LOCATION)
     });
 }

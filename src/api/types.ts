@@ -61,8 +61,10 @@ export interface Condition {
 
 
 export interface ForecastDay {
-  day: Record<string, any>; 
+  day: TemperatureRange;
   hour: HourlyWeatherData[];
+  astro:AstroData;
+  date:string;
 }
 
 
@@ -75,3 +77,15 @@ export interface WeatherForecastResponse {
   location: WeatherLocation;
   forecast: Forecast;
 }
+
+
+export interface AstroData {
+  sunrise: string;
+  sunset: string;
+}
+
+export interface TemperatureRange {
+  maxtemp_c: number;
+  mintemp_c: number;
+}
+
