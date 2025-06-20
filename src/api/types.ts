@@ -87,5 +87,8 @@ export interface AstroData {
 export interface TemperatureRange {
   maxtemp_c: number;
   mintemp_c: number;
+  avghumidity:number;
+  maxwind_kph:number;
+  condition:Condition;
 }
 

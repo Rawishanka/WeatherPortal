@@ -40,7 +40,7 @@ class WeatherAPI {
     async getHourlyData(date: string, { latitude, longitude }: Cordinates) {
         const url = this.createURL(`${API_CONFIG.BASE_URL}/marine.json`, {
             q: `${latitude},${longitude}`,
-            dt:date
+            days:date
         });
         return await this.fetchData<WeatherForecastResponse>(url);
     }

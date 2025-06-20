@@ -12,9 +12,9 @@ const CurrentWeatherSkeleton = () => {
             <CardTitle className="sm:text-xl text-sm">
               <Skeleton className="h-5 w-32" />
             </CardTitle>
-            <p className="text-xs text-muted-foreground self-end pb-0.5">
+            <div className="text-xs text-muted-foreground self-end pb-0.5">
               <Skeleton className="h-3 w-20" />
-            </p>
+            </div>
           </div>
         </div>
       </CardHeader>

@@ -31,7 +31,7 @@ export function useLocationQuery(keyWord?: string) {
 export function useHourlyDataQuery(days?: string) {
     days = days ?? "5";
     return useQuery({
-        queryKey: KEYS.location(days),
+        queryKey: KEYS.hourlyData(days),
         queryFn: ()=> weatherAPI.getHourlyData(days, DEFAULT_LOCATION)
     });
 }

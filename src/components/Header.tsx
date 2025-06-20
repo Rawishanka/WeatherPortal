@@ -13,7 +13,7 @@ const Header = () => {
             </div>
             {/* Search bar */}
             <div className="flex-grow flex justify-center">
-                search bar
+                
             </div>
 
             {/* Theme toggle button */}

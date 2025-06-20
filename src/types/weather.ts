@@ -9,3 +9,13 @@ export interface HourlyWeatherData {
   humidity: number;   
   feelslike_c: number;  
 }
+
+export interface TableData {
+  date:string;
+  humidity:number;
+  max_temp:number;
+  min_temp:number;
+  wind_speed:number;
+  text:string;
+  icon:string;
+}

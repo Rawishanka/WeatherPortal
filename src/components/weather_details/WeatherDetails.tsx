@@ -38,7 +38,7 @@ const WeatherDetails = ({sunrise,sunset, wind_direction, pressure}:WeatherDetail
     },
   ];
   return (
-    <Card>
+    <Card className=''>
       <CardHeader>
         <CardTitle>Weather Details</CardTitle>
       </CardHeader>
