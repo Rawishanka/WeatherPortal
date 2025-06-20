@@ -1,5 +1,5 @@
 import type { Location, WeatherResponse } from '@/api/types'
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { ArrowDown, ArrowUp, CloudSun, Droplet, Droplets, Sun, Thermometer, Wind } from 'lucide-react';
 import { formatWeatherDate } from '@/utils/date';
 

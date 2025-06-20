@@ -1,5 +1,5 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
 
 
@@ -10,7 +10,7 @@ interface WeatherDetailsProps {
   pressure:string;
 }
 
-const ExtraWeatherDetails = ({sunrise,sunset, wind_direction, pressure}:WeatherDetailsProps) => {
+const WeatherDetails = ({sunrise,sunset, wind_direction, pressure}:WeatherDetailsProps) => {
    const details = [
     {
       title: "Sunrise",
@@ -64,4 +64,4 @@ const ExtraWeatherDetails = ({sunrise,sunset, wind_direction, pressure}:WeatherD
   )
 }
 
-export default ExtraWeatherDetails
+export default WeatherDetails
