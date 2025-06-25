@@ -95,7 +95,7 @@ const WeatherDashboard = () => {
           </div>
         </div>
         {/* search history */}
-        <SearchHistory removeMemento={removeMemento} mementos={mementos}/>
+        <SearchHistory selectCordinate={setSelectedCity} removeMemento={removeMemento} mementos={mementos}/>
         <div className=" mt-2">
           <div className="flex lg:flex-row flex-col gap-4">
             {weather.isLoading ? (
