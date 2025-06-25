@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+// External library imports
+import React from 'react';
 import {
   LineChart,
   Line,
@@ -8,7 +8,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+
+// Internal application modules (types)
 import type { HourlyWeatherData } from '@/types/weather';
+
+// Internal UI components
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+
 
 
 interface ChartData {

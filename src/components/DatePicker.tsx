@@ -1,9 +1,12 @@
-import * as React from "react"
-import { ChevronDownIcon } from "lucide-react"
-import { Label } from "./ui/label"
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
-import { Button } from "./ui/button"
-import { Calendar } from "./ui/calendar"
+// External library imports
+import * as React from "react";
+import { ChevronDownIcon } from "lucide-react";
+
+// Internal UI components
+import { Label } from "./ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Button } from "./ui/button";
+import { Calendar } from "./ui/calendar";
 
 
 

@@ -1,7 +1,11 @@
 
+// External library imports
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Sunrise, Sunset, Compass, Gauge } from "lucide-react";
+
+// Internal UI components
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+
 
 
 interface WeatherDetailsProps {

@@ -1,5 +1,9 @@
-import { Link } from 'react-router-dom'
+// Internal library imports
+import { Link } from 'react-router-dom';
+
+// Internal UI components
 import { ThemeToggleButton } from './ThemeToggleButton';
+
 
 const Header = () => {
     return (

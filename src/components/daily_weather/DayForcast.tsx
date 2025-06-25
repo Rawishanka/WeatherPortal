@@ -1,9 +1,15 @@
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { ArrowDown, ArrowUp, Droplets, Wind } from 'lucide-react'
+// External library imports
+import React from 'react';
+import { ArrowDown, ArrowUp, Droplets, Wind } from 'lucide-react';
 import { format } from "date-fns";
+
+// Internal application modules (types)
 import type { TableData } from '@/types/weather';
 import type { Forecast } from '@/api/types';
+
+// Internal UI components
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+
 
 
 

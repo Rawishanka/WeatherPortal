@@ -1,9 +1,12 @@
 import { Home } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const NotFoundPage = () => {
+
+  const navigate = useNavigate();
+
   const handleGoHome = () => {
-    // In a real app, you'd use your router here
-    console.log('Navigate to home');
+    navigate("/")
   };
 
   return (

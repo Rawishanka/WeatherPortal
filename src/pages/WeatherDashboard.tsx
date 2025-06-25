@@ -1,33 +1,37 @@
-import type { Location } from "@/api/types"
-import CurrentCityWeather from "@/components/current_weather/CurrentWeather"
-import DailyForcast from "@/components/daily_weather/DayForcast"
-import WeatherDetails from "@/components/weather_details/WeatherDetails"
-import CurrentWeatherSkeleton from "@/components/current_weather/CurrentWeatherSkeleton"
-import TodayWeather from "@/components/today_weather/TodayWeather"
-import { Button } from "@/components/ui/button"
+// Built-in and external library imports
+import { useEffect, useState } from "react";
+import { RefreshCw } from "lucide-react";
+
+// Internal application modules (hooks, services, types)
 import {
   useHourlyDataQuery,
-  useLocationQuery,
   useWeatherQuery
-} from "@/hooks/useWeather"
-import { RefreshCw } from "lucide-react"
-import WeatherDetailsSkeleton from "@/components/weather_details/WeatherDetailsSkeleton"
-import ErrorAlert from "@/components/error/ErrorAlert"
-import TodayWeatherSkeleton from "@/components/today_weather/TodayWeatherSkeleton"
-import DayForcastMobile from "@/components/daily_weather/DayForcastMobile"
-import Header from "@/components/Header"
-import CurrentCityWeatherMobile from "@/components/current_weather/CurrentWeatherMobile"
-import useMediaQuery from "@/hooks/useMediaQuery"
-import CurrentWeatherMobileSkeleton from "@/components/current_weather/CurrentWeatherMobileSkeleton"
-import DailyForecastSkeleton from "@/components/daily_weather/DailyForcastSkeleton"
-import DailyForcastSkeletonMobile from "@/components/daily_weather/DailyForcastSkeletonMobile"
-import WeatherSearch from "@/components/weather_search/WeatherSearch"
-import { useEffect, useState } from "react"
-import type { Cordinates } from "@/types/weather"
-import Footer from "@/components/Footer"
-import SearchHistory from "@/components/history/SearchHistory"
-import { WeatherDataOriginator } from "@/services/memento_pattern/WeatherDataOriginator"
-import { useWeatherCaretaker } from "@/hooks/useWeatherCaretaker"
+} from "@/hooks/useWeather";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { useWeatherCaretaker } from "@/hooks/useWeatherCaretaker";
+import { WeatherDataOriginator } from "@/services/memento_pattern/WeatherDataOriginator";
+import type { Cordinates } from "@/types/weather";
+
+// Internal UI and feature components
+import { Button } from "@/components/ui/button";
+import ErrorAlert from "@/components/error/ErrorAlert";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import WeatherSearch from "@/components/weather_search/WeatherSearch";
+import SearchHistory from "@/components/history/SearchHistory";
+import CurrentCityWeather from "@/components/current_weather/CurrentWeather";
+import CurrentWeatherSkeleton from "@/components/current_weather/CurrentWeatherSkeleton";
+import CurrentCityWeatherMobile from "@/components/current_weather/CurrentWeatherMobile";
+import CurrentWeatherMobileSkeleton from "@/components/current_weather/CurrentWeatherMobileSkeleton";
+import DailyForcast from "@/components/daily_weather/DayForcast";
+import DayForcastMobile from "@/components/daily_weather/DayForcastMobile";
+import DailyForecastSkeleton from "@/components/daily_weather/DailyForcastSkeleton";
+import DailyForcastSkeletonMobile from "@/components/daily_weather/DailyForcastSkeletonMobile";
+import TodayWeather from "@/components/today_weather/TodayWeather";
+import TodayWeatherSkeleton from "@/components/today_weather/TodayWeatherSkeleton";
+import WeatherDetails from "@/components/weather_details/WeatherDetails";
+import WeatherDetailsSkeleton from "@/components/weather_details/WeatherDetailsSkeleton";
+
 
 const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState<Cordinates>();
@@ -44,7 +48,7 @@ const WeatherDashboard = () => {
     const memento = originator.save();
     addMemento(memento);
   }
-}, [weather.data, hourlyData.data]); 
+}, [weather.data]); 
 
   const showSkeleton = weather.isLoading || hourlyData.isLoading;
   const isForecastReady = !hourlyData.isLoading && !!hourlyData.data?.forecast;

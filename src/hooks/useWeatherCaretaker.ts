@@ -1,6 +1,7 @@
+// Internal application modules (services, hooks, types)
 import { WeatherDataMemento } from "@/services/memento_pattern/WeatherDataMemento";
-import type { WeatherSnapshot } from "@/types/weather";
 import { useLocalStorage } from "./useLocalStorage";
+import type { WeatherSnapshot } from "@/types/weather";
 
 
 export function useWeatherCaretaker() {
@@ -22,7 +23,6 @@ export function useWeatherCaretaker() {
     const updated = snapshots.filter(
       (s) => s.weather.location.name !== cityName
     );
-    console.log(updated)
     setSnapshots(updated);
   };
 

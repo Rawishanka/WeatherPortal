@@ -1,7 +1,5 @@
-import React from 'react'
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
-import { Button } from '../ui/button'
-import { AlertTriangle, MapPin } from 'lucide-react'
+import { AlertTriangle } from 'lucide-react'
 
 
 interface AlertProps {

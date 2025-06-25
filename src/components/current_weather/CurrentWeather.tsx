@@ -1,7 +1,13 @@
-import type { Location, WeatherResponse } from '@/api/types'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { ArrowDown, ArrowUp, CloudSun, Droplet, Droplets, Sun, Thermometer, Wind } from 'lucide-react';
+// Built-in and external library imports
+import { ArrowDown, ArrowUp, CloudSun, Droplets, Sun, Wind } from 'lucide-react';
+
+// Internal application modules (utils, types)
+import type { WeatherResponse } from '@/api/types';
 import { formatWeatherDate } from '@/utils/date';
+
+// Internal UI components
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+
 
 
 interface CityWeatherProps {

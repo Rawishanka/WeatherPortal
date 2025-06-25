@@ -1,12 +1,14 @@
+// External library imports
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ThemeProvider } from './context/themeProvider'
-import WelcomePage from './pages/WelcomePage'
-import WeatherDashboard from './pages/WeatherDashboard'
-import Layout from './components/Layout'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import NotFoundPage from './pages/NotFound'
+// Internal application modules (context, components, pages)
+import { ThemeProvider } from './context/themeProvider';
+import Layout from './components/Layout';
+import WelcomePage from './pages/WelcomePage';
+import WeatherDashboard from './pages/WeatherDashboard';
+import NotFoundPage from './pages/NotFound';
+
 
 
 
@@ -36,7 +38,6 @@ function App() {
           </Layout>
         </ThemeProvider>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

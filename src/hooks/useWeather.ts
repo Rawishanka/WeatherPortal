@@ -1,7 +1,11 @@
+// External library imports
+import { useQuery } from "@tanstack/react-query";
+
+// Internal application modules (API, constants, types)
 import { weatherAPI } from "@/api/weather";
 import { DEFAULT_LOCATION } from "@/constants/weather";
-import type { Cordinates } from "@/types/weather"
-import { useQuery } from "@tanstack/react-query"
+import type { Cordinates } from "@/types/weather";
+
 
 const KEYS = {
     weather: (cordinates: Cordinates) => ["weather", cordinates] as const,

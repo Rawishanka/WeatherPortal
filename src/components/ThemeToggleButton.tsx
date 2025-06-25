@@ -1,5 +1,9 @@
-import { useTheme } from "@/context/themeProvider";
+// External library imports
 import { Moon, Sun } from "lucide-react";
+
+// Internal application modules (context)
+import { useTheme } from "@/context/themeProvider";
+
 
 
 export function ThemeToggleButton() {

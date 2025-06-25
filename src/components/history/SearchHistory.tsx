@@ -1,4 +1,3 @@
-import { useWeatherCaretaker } from "@/hooks/useWeatherCaretaker";
 import type { WeatherSnapshot } from "@/types/weather";
 
 interface HistoryProps {

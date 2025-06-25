@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function DailyForcastSkeletonMobile() {
   // Render 5 skeleton day items

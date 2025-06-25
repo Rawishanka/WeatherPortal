@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command'
-import { Button } from '../ui/button';
+// External library imports
+import { useState } from 'react';
 import { Loader2, Search } from 'lucide-react';
+
+// Internal application modules (hooks, types)
 import { useLocationQuery } from '@/hooks/useWeather';
+import { useDebounce } from '@/hooks/useDebounce';
 import type { Cordinates } from '@/types/weather';
 import type { Location } from '@/api/types';
-import { useDebounce } from '@/hooks/useDebounce';
+
+// Internal UI components
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
+import { Button } from '../ui/button';
+
 
 
 interface Props {

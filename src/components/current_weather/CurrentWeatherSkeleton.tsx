@@ -1,6 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-import { CloudSun } from "lucide-react"
+// External library imports
+import { CloudSun } from "lucide-react";
+
+// Internal UI components
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
 
 const CurrentWeatherSkeleton = () => {
   return (
