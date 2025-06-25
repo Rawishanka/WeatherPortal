@@ -1,4 +1,4 @@
-export const API_URL = "http://api.weatherapi.com/v1";
+export const API_URL = "https://api.weatherapi.com/v1";
 
 
 export const DEFAULT_LOCATION = { latitude: 6.93, longitude: 79.85 }
