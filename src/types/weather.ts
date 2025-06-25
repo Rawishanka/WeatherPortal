@@ -1,3 +1,5 @@
+import type { WeatherForecastResponse, WeatherResponse } from "@/api/types";
+
 export interface Cordinates {
     latitude : number,
     longitude : number
@@ -19,3 +21,9 @@ export interface TableData {
   text:string;
   icon:string;
 }
+
+
+export type WeatherSnapshot = {
+    weather: WeatherResponse;
+    forecast: WeatherForecastResponse;
+};

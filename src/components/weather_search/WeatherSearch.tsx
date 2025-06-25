@@ -18,12 +18,12 @@ const WeatherSearch = ({ selectCordinate }: Props) => {
     const geoQuery = useLocationQuery(debouncedKeyword);
 
     const handleSelect = (location: Location) => {
-        console.log(location);
         const cord: Cordinates = {
             latitude: location.lat,
             longitude: location.lon
         };
         selectCordinate(cord);
+        
         setOpen(false);
     };
 

@@ -25,12 +25,26 @@ import WeatherSearch from "@/components/weather_search/WeatherSearch"
 import { useEffect, useState } from "react"
 import type { Cordinates } from "@/types/weather"
 import Footer from "@/components/Footer"
+import SearchHistory from "@/components/history/SearchHistory"
+import { WeatherDataOriginator } from "@/services/memento_pattern/WeatherDataOriginator"
+import { useWeatherCaretaker } from "@/hooks/useWeatherCaretaker"
 
 const WeatherDashboard = () => {
   const [selectedCity, setSelectedCity] = useState<Cordinates>();
   const weather = useWeatherQuery(selectedCity);
-  const hourlyData = useHourlyDataQuery("5",selectedCity);
+  const hourlyData = useHourlyDataQuery("5", selectedCity);
   const isMobile = useMediaQuery(490);
+
+  const { addMemento, mementos, removeMemento } = useWeatherCaretaker();
+
+ useEffect(() => {
+  if (weather.data && hourlyData.data) {
+    const originator = new WeatherDataOriginator();
+    originator.setState(weather.data, hourlyData.data);
+    const memento = originator.save();
+    addMemento(memento);
+  }
+}, [weather.data, hourlyData.data]); 
 
   const showSkeleton = weather.isLoading || hourlyData.isLoading;
   const isForecastReady = !hourlyData.isLoading && !!hourlyData.data?.forecast;
@@ -53,7 +67,7 @@ const WeatherDashboard = () => {
     <>
       <Header />
       <div className="px-6 py-8 flex-grow container mx-auto ">
-        {/* reload current weather */}
+        {/* reload current weather and search weather*/}
         {isMobile && <div className="w-full flex justify-center"><WeatherSearch selectCordinate={setSelectedCity} /></div>}
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold tracking-tight">Weather</h1>
@@ -73,7 +87,8 @@ const WeatherDashboard = () => {
             </Button>
           </div>
         </div>
-
+        {/* search history */}
+        <SearchHistory removeMemento={removeMemento} mementos={mementos}/>
         <div className=" mt-2">
           <div className="flex lg:flex-row flex-col gap-4">
             {weather.isLoading ? (
@@ -122,7 +137,7 @@ const WeatherDashboard = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }
