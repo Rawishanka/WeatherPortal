@@ -6,6 +6,7 @@ import WeatherDashboard from './pages/WeatherDashboard'
 import Layout from './components/Layout'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import NotFoundPage from './pages/NotFound'
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <ThemeProvider defaultTheme='system'>
           <Layout>
             <Routes>
+              <Route path='*' Component={NotFoundPage} />
               <Route path='/dashboard' Component={WeatherDashboard} />
               <Route path='/' Component={WelcomePage} />
             </Routes>
