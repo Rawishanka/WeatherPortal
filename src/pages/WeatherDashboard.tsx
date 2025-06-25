@@ -42,13 +42,16 @@ const WeatherDashboard = () => {
   const { addMemento, mementos, removeMemento } = useWeatherCaretaker();
 
  useEffect(() => {
+   console.log("passe", weather.data, hourlyData.data )
   if (weather.data && hourlyData.data) {
     const originator = new WeatherDataOriginator();
     originator.setState(weather.data, hourlyData.data);
     const memento = originator.save();
+
+    console.log("passes through")
     addMemento(memento);
   }
-}, [weather.data]); 
+}, [weather.data, hourlyData.data]); 
 
   const showSkeleton = weather.isLoading || hourlyData.isLoading;
   const isForecastReady = !hourlyData.isLoading && !!hourlyData.data?.forecast;
