@@ -27,19 +27,20 @@ type Props = {
 };
 const TodayWeather = React.memo(({ hourlyData }: Props) => {
 
-  function convertToChartData(data: HourlyWeatherData[]): ChartData[] {
-    return data
-      .filter(item => {
-        const hourPart = item.time.split(" ")[1];
-        const hour = parseInt(hourPart.slice(0, 2), 10);
-        return hour % 2 === 0;
-      })
-      .map(item => ({
-        time: item.time.split(" ")[1],
-        temp: item.temp_c,
-        feels_like: item.feelslike_c,
-      }));
-  }
+  function convertToChartData(data: HourlyWeatherData[] = []): ChartData[] {
+  return data
+    .filter(item => {
+      const hourPart = item.time.split(" ")[1];
+      const hour = parseInt(hourPart.slice(0, 2), 10);
+      return hour % 2 === 0;
+    })
+    .map(item => ({
+      time: item.time.split(" ")[1],
+      temp: item.temp_c,
+      feels_like: item.feelslike_c,
+    }));
+}
+
 
 
   const chartData = convertToChartData(hourlyData);
