@@ -22,7 +22,7 @@ const SearchHistory = ({ mementos, removeMemento, selectCordinate }: HistoryProp
             {historyList.map((item) => (
                 <div
                     key={item.weather.location.name}
-                    className="relative"
+                    className="relative border"
 
                 >
                     <div onClick={() => handleSelect(item.weather.location)}>
